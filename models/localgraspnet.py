@@ -8,6 +8,7 @@ import torch.nn.functional as F
 from pytorch3d.ops import knn_points
 
 from .pointnet import PointNetfeat
+from .point_transformer import PointTransformer  # 引入 Point Transformer
 
 
 class PointMultiGraspNet(nn.Module):
@@ -16,6 +17,7 @@ class PointMultiGraspNet(nn.Module):
         super().__init__()
         self.k_cls = k_cls
         self.pointnet = PointNetfeat(feature_len=3)
+        #self.point_transformer = PointTransformer(in_channels=35, out_channels=1024)  # 修改为 Point Transformer
         self.point_layer = nn.Sequential(nn.Linear(1024, 512),
                                          nn.LayerNorm(512), nn.Dropout(0.3),
                                          nn.ReLU(inplace=True))
@@ -44,7 +46,8 @@ class PointMultiGraspNet(nn.Module):
 
     def forward(self, points, info):
         # fuse pixel to points
-        points = points.transpose(1, 2)
+        points = points.transpose(1, 2) #[center-num, 35, 512]
+        pos = points[:, :3, :]  # 提取点云的位置信息 [center-num, 512, 3]
         # pointnet
         features = self.pointnet(points)
         # mlp

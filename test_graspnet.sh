@@ -5,8 +5,8 @@ CUDA_VISIBLE_DEVICES=0 python test_graspnet.py \
 --anchor-w 50 \
 --anchor-z 20 \
 --grid-size 8 \
---scene-l 100 \
---scene-r 130 \
+--scene-l 0 \
+--scene-r 1 \
 --all-points-num 25600 \
 --group-num 512 \
 --local-k 10 \
@@ -16,8 +16,8 @@ CUDA_VISIBLE_DEVICES=0 python test_graspnet.py \
 --local-thres 0.01 \
 --heatmap-thres 0.01 \
 --num-workers 4 \
---dataset-path '/data/6dto2drefine_realsense' \
---checkpoint './realsense_checkpoint' \
---scene-path '/ssd/graspnet' \
+--dataset-path './dataset_ckpt/realsense/6dto2drefine_realsense' \
+--checkpoint './dataset_ckpt/realsense_checkpoint.realsense_checkpoint' \
+--scene-path './dataset_ckpt/graspnet' \
 --dump-dir 'pred_grasps' \
 --description 'realsense_seen'

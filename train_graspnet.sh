@@ -1,5 +1,5 @@
 CUDA_VISIBLE_DEVICES=0 python train_graspnet.py \
---batch-size 4 \
+--batch-size 2 \
 --step-cnt 2 \
 --lr 1e-2 \
 --anchor-num 7 \
@@ -10,7 +10,7 @@ CUDA_VISIBLE_DEVICES=0 python train_graspnet.py \
 --group-num 512 \
 --center-num 128 \
 --scene-l 0 \
---scene-r 100 \
+--scene-r 29 \
 --noise 0 \
 --grid-size 8 \
 --input-w 640 \
@@ -24,7 +24,7 @@ CUDA_VISIBLE_DEVICES=0 python train_graspnet.py \
 --num-workers 4 \
 --save-freq 1 \
 --optim 'adamw' \
---dataset-path '/data/realsense' \
---scene-path '/ssd/graspnet' \
+--dataset-path './dataset_ckpt/realsense/6dto2drefine_realsense' \
+--scene-path './dataset_ckpt/graspnet' \
 --description 'realsense' \
 --joint-trainning
