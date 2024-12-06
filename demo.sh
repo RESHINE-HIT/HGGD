@@ -1,5 +1,5 @@
 CUDA_VISIBLE_DEVICES=0 python demo.py \
---center-num 48 \
+--center-num 32 \
 --anchor-num 7 \
 --anchor-k 6 \
 --anchor-w 50 \
@@ -13,6 +13,7 @@ CUDA_VISIBLE_DEVICES=0 python demo.py \
 --input-w 640 \
 --local-thres 0.01 \
 --heatmap-thres 0.01 \
---checkpoint './dataset_ckpt/realsense_checkpoint.realsense_checkpoint' \
+--checkpoint './logs/241206_170952_realsense/epoch_4_iou_1.000_cover_0.570' \
 --rgb-path './images/demo_rgb.png' \
---depth-path './images/demo_depth.png'
+--depth-path './images/demo_depth.png' \
+#--localnet 'PointMultiGraspNet_V3' \

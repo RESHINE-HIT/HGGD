@@ -217,7 +217,11 @@ def parse_args():
                         type=int,
                         default=123,
                         help='Random seed')
-
+    parser.add_argument('--localnet',
+                        type=str,
+                        default='PointMultiGraspNet',
+                        help='Local network model') 
+    
     args = parser.parse_args()
     if args.joint_trainning:
         args.pre_epochs = 0

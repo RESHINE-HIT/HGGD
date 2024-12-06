@@ -4,7 +4,7 @@ import numpy as np
 import open3d as o3d
 
 camera = 'realsense'
-logging.warn(f'Using {camera} camera now!')
+logging.warning(f'Using {camera} camera now!')
 
 
 def get_camera_intrinsic(camera=camera):
@@ -14,6 +14,10 @@ def get_camera_intrinsic(camera=camera):
     elif camera == 'realsense':
         intrinsics = np.array([[927.17, 0, 651.32], [0, 927.37, 349.62],
                                [0, 0, 1]])
+    elif camera == 'self':
+        intrinsics = np.array([[1278.218123750931, 0, 614.780747537815], 
+                            [0, 1277.690597970655, 518.779035254941], 
+                            [0, 0, 1]])
     else:
         raise ValueError(
             'Camera format must be either "kinect" or "realsense".')

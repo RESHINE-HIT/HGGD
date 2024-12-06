@@ -15,7 +15,7 @@ from dataset.evaluation import (anchor_output_process, collision_detect,
                                 detect_2d_grasp, detect_6d_grasp_multi)
 from dataset.pc_dataset_tools import data_process, feature_fusion
 from models.anchornet import AnchorGraspNet
-from models.localgraspnet import PointMultiGraspNet
+from models.localgraspnet import PointMultiGraspNet, PointMultiGraspNet_V3
 from train_utils import *
 
 parser = argparse.ArgumentParser()
@@ -51,6 +51,8 @@ parser.add_argument('--rotation-num', type=int, default=1)
 
 # others
 parser.add_argument('--random-seed', type=int, default=123, help='Random seed')
+
+parser.add_argument('--localnet', type=str, default='PointMultiGraspNet', help='Local network model') 
 
 args = parser.parse_args()
 
@@ -267,7 +269,10 @@ if __name__ == '__main__':
     anchornet = AnchorGraspNet(in_dim=4,
                                ratio=args.ratio,
                                anchor_k=args.anchor_k)
-    localnet = PointMultiGraspNet(info_size=3, k_cls=args.anchor_num**2)
+    if args.localnet == 'PointMultiGraspNet_V3':
+        localnet = PointMultiGraspNet_V3(3, args.anchor_num**2)
+    else:
+        localnet = PointMultiGraspNet(3, args.anchor_num**2)
 
     # gpu
     anchornet = anchornet.cuda()

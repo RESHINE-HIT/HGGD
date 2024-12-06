@@ -8,7 +8,7 @@ CUDA_VISIBLE_DEVICES=0 python train_graspnet.py \
 --anchor-z 20 \
 --all-points-num 25600 \
 --group-num 512 \
---center-num 128 \
+--center-num 32 \
 --scene-l 0 \
 --scene-r 29 \
 --noise 0 \
@@ -27,4 +27,6 @@ CUDA_VISIBLE_DEVICES=0 python train_graspnet.py \
 --dataset-path './dataset_ckpt/realsense/6dto2drefine_realsense' \
 --scene-path './dataset_ckpt/graspnet' \
 --description 'realsense' \
---joint-trainning
+--joint-trainning \
+#--localnet 'PointMultiGraspNet_V3' \
+

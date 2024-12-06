@@ -23,7 +23,7 @@ from dataset.pc_dataset_tools import (data_process, feature_fusion,
                                       get_ori_grasp_label)
 from dataset.utils import shift_anchors
 from models.anchornet import AnchorGraspNet, BNMomentumScheduler
-from models.localgraspnet import PointMultiGraspNet
+from models.localgraspnet import PointMultiGraspNet, PointMultiGraspNet_V3
 from models.losses import compute_anchor_loss, compute_multicls_loss
 from train_utils import *
 
@@ -592,7 +592,11 @@ def run():
     anchornet = AnchorGraspNet(ratio=args.ratio,
                                in_dim=input_channels,
                                anchor_k=args.anchor_k)
-    localnet = PointMultiGraspNet(3, args.anchor_num**2)
+    
+    if args.localnet == 'PointMultiGraspNet_V3':
+        localnet = PointMultiGraspNet_V3(3, args.anchor_num**2)
+    else:
+        localnet = PointMultiGraspNet(3, args.anchor_num**2)
 
     # load checkpoint
     basic_ranges = torch.linspace(-1, 1, args.anchor_num + 1).cuda()

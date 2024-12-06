@@ -21,7 +21,7 @@ from dataset.grasp import RectGraspGroup
 from dataset.graspnet_dataset import GraspnetPointDataset
 from dataset.pc_dataset_tools import data_process, feature_fusion
 from models.anchornet import AnchorGraspNet
-from models.localgraspnet import PointMultiGraspNet
+from models.localgraspnet import PointMultiGraspNet, PointMultiGraspNet_V3
 from train_utils import *
 
 parser = argparse.ArgumentParser()
@@ -71,6 +71,10 @@ parser.add_argument('--description',
                     type=str,
                     default='',
                     help='Logging description')
+parser.add_argument('--localnet',
+                    type=str,
+                    default='PointMultiGraspNet',
+                    help='Local network model') 
 
 args = parser.parse_args()
 
@@ -106,7 +110,10 @@ def inference():
     anchornet = AnchorGraspNet(in_dim=input_channels,
                                ratio=args.ratio,
                                anchor_k=args.anchor_k)
-    localnet = PointMultiGraspNet(info_size=3, k_cls=args.anchor_num**2)
+    if args.localnet == 'PointMultiGraspNet_V3':
+        localnet = PointMultiGraspNet_V3(3, args.anchor_num**2)
+    else:
+        localnet = PointMultiGraspNet(3, args.anchor_num**2)
 
     # multi gpu
     anchornet = anchornet.cuda()
