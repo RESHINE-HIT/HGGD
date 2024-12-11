@@ -21,7 +21,7 @@ from dataset.grasp import RectGraspGroup
 from dataset.graspnet_dataset import GraspnetPointDataset
 from dataset.pc_dataset_tools import data_process, feature_fusion
 from models.anchornet import AnchorGraspNet
-from models.localgraspnet import PointMultiGraspNet, PointMultiGraspNet_V3
+from models.localgraspnet import PointMultiGraspNet, PointMultiGraspNet_V3, PointMultiGraspNet_PointNext
 from train_utils import *
 
 parser = argparse.ArgumentParser()
@@ -101,7 +101,7 @@ def inference():
     test_data = DataLoader(test_dataset,
                            batch_size=1,
                            pin_memory=True,
-                           num_workers=1)
+                           num_workers=4)
     test_data.dataset.unaug()
     test_data.dataset.eval()
 
@@ -112,6 +112,8 @@ def inference():
                                anchor_k=args.anchor_k)
     if args.localnet == 'PointMultiGraspNet_V3':
         localnet = PointMultiGraspNet_V3(3, args.anchor_num**2)
+    elif args.localnet == 'PointMultiGraspNet_PointNext':
+        localnet = PointMultiGraspNet_PointNext(3, args.anchor_num**2)
     else:
         localnet = PointMultiGraspNet(3, args.anchor_num**2)
 

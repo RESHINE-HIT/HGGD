@@ -6,7 +6,7 @@ CUDA_VISIBLE_DEVICES=0 python test_graspnet.py \
 --anchor-z 20 \
 --grid-size 8 \
 --scene-l 100 \
---scene-r 101 \
+--scene-r 129 \
 --all-points-num 25600 \
 --group-num 512 \
 --local-k 10 \
@@ -21,4 +21,4 @@ CUDA_VISIBLE_DEVICES=0 python test_graspnet.py \
 --scene-path './dataset_ckpt/graspnet' \
 --dump-dir 'pred_grasps' \
 --description 'realsense_seen' \
-#--localnet 'PointMultiGraspNet_V3' \
+#--localnet 'PointMultiGraspNet_PointNext' \
